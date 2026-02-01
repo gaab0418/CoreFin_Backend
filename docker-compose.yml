@@ -1,18 +1,17 @@
-version: '3.8'
-
 services:
   database:
-    image: postgres:15-alpine
+    image: postgres:${DB_VERSION:-15-alpine}
     container_name: dev-postgres-corefin
     restart: always
     environment:
-      POSTGRES_USER: postgres 
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: corefin
+      POSTGRES_USER: ${DOCKER_USER:-postgres} 
+      POSTGRES_PASSWORD: ${DOCKER_PASSWORD:-postgres}
+      POSTGRES_DB: ${DOCKER_DB:-postgres}
     ports:
-      - "5432:5432" # [máquina] : [Docker]
+      - "${DB_PORT:-5432}:5432" # [máquina] : [Docker]
     volumes:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
+

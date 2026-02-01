@@ -10,6 +10,9 @@ async function bootstrap() {
 		AppModule,
 		new FastifyAdapter(),
 	);
+
+	app.setGlobalPrefix(process.env.DEFAULT_PATH || '');
+
 	await app.listen(3000);
 }
 bootstrap();
